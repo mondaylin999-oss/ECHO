@@ -81,7 +81,7 @@ body{background:radial-gradient(circle at 50% 42%,#172b4d 0,#08101f 42%,#03060c 
 .tv-text ul{margin:0;padding-left:18px;color:#adbbcf;font-size:12px;line-height:1.7}
 .tv-meta{display:flex;align-items:flex-end;gap:26px;margin-top:10px}
 .tv-meta .fact{padding:0}
-@keyframes stage-spin{0%,100%{transform:rotateY(-42deg) rotateX(7deg) translateY(0)}50%{transform:rotateY(42deg) rotateX(-5deg) translateY(-12px)}}
+@keyframes stage-spin{0%,100%{transform:rotateY(-28deg) rotateX(5deg) translateY(0)}50%{transform:rotateY(28deg) rotateX(-4deg) translateY(-12px)}}
 @media(max-width:900px){.tool-stage{top:96px;left:12px;right:12px;bottom:12px;display:flex;flex-direction:column;overflow:auto;pointer-events:auto}.tv-centre{order:1;flex:none}.stage-view{flex:none;height:34vh}.tv-side{order:2;flex-direction:row;flex:none;height:110px}.tv-photo{flex:1 1 0}.tv-text{max-height:none;grid-template-columns:1fr;order:3}.tool-stage .tv-side:last-child{order:2}}
 @media(prefers-reduced-motion:reduce){.stage-cutout{animation:none}}
 
