@@ -16,6 +16,8 @@ export interface AppOptions {
 export function createApp(content: Content, options: AppOptions = {}): Express {
   const app = express();
   app.disable("x-powered-by");
+  // On Vercel every request arrives through one proxy; trust it so rate limiting sees the client IP.
+  if (process.env.VERCEL) app.set("trust proxy", 1);
 
   // Images are loaded by a front-end on another origin, so they must be embeddable cross-origin.
   app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));

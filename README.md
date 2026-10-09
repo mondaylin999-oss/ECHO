@@ -51,6 +51,10 @@ What is live and what is still mocked in `frontend/src/api/index.ts`:
 
 If the API cannot be reached when the page loads, or `VITE_USE_MOCKS=true` is set, the client falls back to its fixtures for everything; the pill in the top-right corner reads "LIVE API" or "MOCK DATA" until the first view change.
 
+## Deploying to Vercel
+
+`vercel.json` deploys the whole repository as one project: the front-end build is the static site, `public/` (tool images, tester page) is copied next to it, and `api/index.js` runs the compiled Express app as a serverless function for `/api/*`. Import the repository in Vercel and deploy; no settings or environment variables are needed, because the app and API share one origin. The rate limit is counted per function instance there, so it is approximate.
+
 ## Project layout
 
 ```
