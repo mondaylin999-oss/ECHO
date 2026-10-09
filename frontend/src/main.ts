@@ -18,7 +18,7 @@ app.append(bgCanvas, focusCanvas, blurLayer, ui);
 
 const topbar = el('header','', 'topbar');
 const brand = el('div','', 'brand');
-const star = el('span','✦','brand-star'); brand.append(star, el('div','SOLAR / SYSTEM','brand-name'), el('div','EXPLORER','brand-kicker'));
+const mark = document.createElement('img'); mark.src='/echo-mark.png'; mark.alt='ECHO logo'; mark.className='brand-mark'; brand.append(mark, el('div','ECHO','brand-name'), el('div','SOLAR SYSTEM EXPLORER','brand-kicker'));
 const status = el('div','', 'status-pill'); status.append(el('span','●','status-dot'), el('span',isLive?'LIVE API':'MOCK DATA','status-text'));
 topbar.append(brand,status); ui.append(topbar);
 const backButton=button('← Back','back-button'); backButton.hidden=true; backButton.ariaLabel='Go back'; ui.append(backButton);
