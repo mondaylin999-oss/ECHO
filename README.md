@@ -29,6 +29,28 @@ The API is then at `http://localhost:3000`.
 | `npm test`                      | Run the vitest + supertest suite (no network needed)            |
 | `npm run generate:placeholders` | Regenerate the SVG placeholder cards in `public/images/tools/`  |
 
+## Front-end
+
+The 3D client (Vite + TypeScript + Three.js) lives in `frontend/` as its own package, managed with pnpm.
+
+```bash
+npm run dev                  # API on http://localhost:3000
+pnpm --dir frontend install
+pnpm --dir frontend dev      # app on http://localhost:5173
+```
+
+The Vite dev server proxies `/api` and `/images` to the API, so no CORS setup is needed locally. For a deployed build, set `VITE_API_BASE_URL` to the API origin and add the site's origin to `CORS_ORIGIN`.
+
+What is live and what is still mocked in `frontend/src/api/index.ts`:
+
+| Feature | Source |
+| --- | --- |
+| Bodies, Mars and Moon tools, tool images, astronaut script, Mars and Moon quizzes | This API |
+| Earth imagery, active fires, climate probe, data search, dataset links, credits, Earth quiz | Built-in fixtures (the API does not serve these yet) |
+| "Mean temp" fact | Shows "No data" (the API has no `meanSurfaceTempC` field) |
+
+If the API cannot be reached when the page loads, or `VITE_USE_MOCKS=true` is set, the client falls back to its fixtures for everything; the pill in the top-right corner reads "LIVE API" or "MOCK DATA" until the first view change.
+
 ## Project layout
 
 ```
