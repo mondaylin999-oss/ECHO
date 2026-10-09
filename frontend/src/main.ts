@@ -132,11 +132,14 @@ function exitFocus(){ toolMarkers.length=0; focusCanvas.style.cursor=''; blurLay
 function openTool(body:Body,tool:Tool){ toolMarkers.length=0; focusCanvas.style.cursor=''; transition('TOOL_DETAIL',{selectedBodyId:body.id,selectedToolId:tool.id}); inspector.hidden=true; focusScene.clear();
   // The panel tells the story; the stage shows the real photographs (click the big photo to enlarge, a thumbnail to switch).
   const panel=el('aside','', 'tool-panel'); panel.append(el('div','MISSION INSTRUMENT','eyebrow'),el('h2',tool.name),el('p',tool.summary,'summary'),fact('YEAR',String(tool.year)),fact('AGENCY',tool.agency)); const quizButton=button('Quiz','button primary'); quizButton.onclick=()=>openQuiz(body); panel.append(quizButton); const list=el('ul'); for(const f of tool.facts)list.append(el('li',f)); panel.append(list);
-  const images=[tool.images.top,tool.images.left,tool.images.right]; const stage=el('section','', 'tool-stage'); const main=document.createElement('img'); main.className='stage-photo'; const caption=el('p','', 'stage-caption'); const thumbs=el('div','', 'stage-thumbs'); let current=images[0];
-  const show=(image:typeof images[number])=>{ current=image; main.src=image.url; main.alt=image.alt; caption.textContent=`${image.caption} · ${image.credit}`; thumbs.querySelectorAll('button').forEach((b,n)=>b.classList.toggle('active',images[n]===image)); };
-  main.onclick=()=>openLightbox(current.url,current.alt);
-  for(const image of images){ const card=el('button','', 'stage-thumb'); card.ariaLabel=image.caption; const im=document.createElement('img'); im.src=image.url; im.alt=image.alt; card.append(im); card.onclick=()=>show(image); thumbs.append(card); }
-  stage.append(main,caption,thumbs); show(images[0]); ui.append(panel,stage); }
+  // Stage: the cut-out spins in 3D (when the tool has one); the real photographs sit in the thumbnails below.
+  type Shot={url:string;alt:string;caption:string;credit?:string;spin?:boolean};
+  const shots:Shot[]=[...(tool.iconUrl?[{url:tool.iconUrl,alt:`${tool.name}, cut-out for the 3D view`,caption:`${tool.name} · rotating 3D view`,spin:true}]:[]),...[tool.images.top,tool.images.left,tool.images.right]];
+  const stage=el('section','', 'tool-stage'); const view=el('div','', 'stage-view'); const main=document.createElement('img'); const caption=el('p','', 'stage-caption'); const thumbs=el('div','', 'stage-thumbs'); let current=shots[0];
+  const show=(shot:Shot)=>{ current=shot; main.src=shot.url; main.alt=shot.alt; main.className=shot.spin?'stage-cutout':'stage-photo'; view.classList.toggle('spin',!!shot.spin); caption.textContent=shot.credit?`${shot.caption} · ${shot.credit}`:shot.caption; thumbs.querySelectorAll('button').forEach((b,n)=>b.classList.toggle('active',shots[n]===shot)); };
+  main.onclick=()=>{ if(!current.spin)openLightbox(current.url,current.alt); };
+  for(const shot of shots){ const card=el('button','', shot.spin?'stage-thumb cutout-thumb':'stage-thumb'); card.ariaLabel=shot.caption; const im=document.createElement('img'); im.src=shot.url; im.alt=shot.alt; card.append(im); card.onclick=()=>show(shot); thumbs.append(card); }
+  view.append(main); stage.append(view,caption,thumbs); show(shots[0]); ui.append(panel,stage); }
 function openLightbox(src:string,alt:string){const modal=el('div','', 'modal-backdrop'); const box=el('div','', 'lightbox'); const close=button('×','icon-button'); close.onclick=()=>modal.remove(); const im=document.createElement('img');im.src=src;im.alt=alt;box.append(close,im);modal.append(box);ui.append(modal);}
 
 let quizBody:Body|null=null, quizQuestions:any[]=[], quizIndex=0, quizScore=0;

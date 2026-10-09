@@ -72,3 +72,12 @@ body{background:radial-gradient(circle at 50% 42%,#172b4d 0,#08101f 42%,#03060c 
 .stage-thumb:hover,.stage-thumb.active{opacity:1;border-color:var(--mint)}
 @media(max-width:700px){.tool-stage{left:12px;right:12px;top:70px;bottom:auto;height:34vh}.stage-photo{max-height:calc(100% - 100px)}.stage-thumb{width:72px;height:48px}}
 @media(min-width:701px){.tool-panel,.tool-stage{top:132px}}
+
+.stage-view{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;perspective:1100px}
+.stage-view.spin{background:radial-gradient(ellipse at 50% 55%,rgba(142,246,213,.12),transparent 60%)}
+.stage-cutout{max-width:min(780px,92%);max-height:92%;object-fit:contain;filter:drop-shadow(0 30px 38px rgba(0,0,0,.65));transform-style:preserve-3d;animation:stage-spin 10s ease-in-out infinite}
+.stage-view .stage-photo{max-height:100%}
+.cutout-thumb{background:radial-gradient(circle at 50% 50%,#17294a,#0a1222)}
+.cutout-thumb img{object-fit:contain;padding:4px}
+@keyframes stage-spin{0%,100%{transform:rotateY(-42deg) rotateX(7deg) translateY(0)}50%{transform:rotateY(42deg) rotateX(-5deg) translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.stage-cutout{animation:none}}
