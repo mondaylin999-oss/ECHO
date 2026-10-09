@@ -1,0 +1,153 @@
+{
+  "_comment": "correctOptionId and explanation are only ever returned by POST /api/quiz/:bodyId/answer. Keys starting with _ are ignored by the API.",
+  "quizzes": [
+    {
+      "bodyId": "mars",
+      "questions": [
+        {
+          "id": "mars-q1",
+          "prompt": "Why does Mars look red?",
+          "options": [
+            { "id": "a", "text": "It is covered in hot lava" },
+            { "id": "b", "text": "Its dust and rocks contain rusty iron" },
+            { "id": "c", "text": "It reflects red light from the Sun" },
+            { "id": "d", "text": "Its sky is full of red clouds" }
+          ],
+          "difficulty": "easy",
+          "correctOptionId": "b",
+          "explanation": "Martian dust is rich in iron oxide, the same stuff as rust, which gives the planet its reddish colour."
+        },
+        {
+          "id": "mars-q2",
+          "prompt": "What did the Ingenuity helicopter do first in history?",
+          "options": [
+            { "id": "a", "text": "Landed on Mars without a parachute" },
+            { "id": "b", "text": "Carried an astronaut across a crater" },
+            { "id": "c", "text": "Made a powered, controlled flight on another planet" },
+            { "id": "d", "text": "Flew all the way from Earth to Mars" }
+          ],
+          "difficulty": "easy",
+          "relatedToolId": "ingenuity",
+          "correctOptionId": "c",
+          "explanation": "On 19 April 2021 Ingenuity lifted off, hovered and landed, the first powered, controlled flight on a world beyond Earth."
+        },
+        {
+          "id": "mars-q3",
+          "prompt": "In which crater did the Perseverance rover land in 2021?",
+          "options": [
+            { "id": "a", "text": "Gale Crater" },
+            { "id": "b", "text": "Gusev Crater" },
+            { "id": "c", "text": "Victoria Crater" },
+            { "id": "d", "text": "Jezero Crater" }
+          ],
+          "difficulty": "medium",
+          "relatedToolId": "perseverance",
+          "correctOptionId": "d",
+          "explanation": "Perseverance landed in Jezero Crater, which once held a lake and a river delta: a good place to look for signs of ancient life."
+        },
+        {
+          "id": "mars-q4",
+          "prompt": "What did the InSight lander's seismometer measure?",
+          "options": [
+            { "id": "a", "text": "Marsquakes shaking the ground" },
+            { "id": "b", "text": "The speed of the wind" },
+            { "id": "c", "text": "The colour of the sky" },
+            { "id": "d", "text": "Radio signals from Earth" }
+          ],
+          "difficulty": "medium",
+          "relatedToolId": "insight",
+          "correctOptionId": "a",
+          "explanation": "InSight recorded more than 1,300 marsquakes. The way their waves travelled revealed the planet's crust, mantle and core."
+        },
+        {
+          "id": "mars-q5",
+          "prompt": "Where does the Curiosity rover get its electricity?",
+          "options": [
+            { "id": "a", "text": "Large solar panels" },
+            { "id": "b", "text": "A small wind turbine" },
+            { "id": "c", "text": "Heat from decaying plutonium" },
+            { "id": "d", "text": "Batteries charged by the Ingenuity helicopter" }
+          ],
+          "difficulty": "hard",
+          "relatedToolId": "curiosity",
+          "correctOptionId": "c",
+          "explanation": "Curiosity carries a radioisotope power system that turns the heat of decaying plutonium into electricity, so it keeps working at night and in dust storms."
+        }
+      ]
+    },
+    {
+      "bodyId": "moon",
+      "questions": [
+        {
+          "id": "moon-q1",
+          "prompt": "What was the name of the lunar module that landed the first people on the Moon in 1969?",
+          "options": [
+            { "id": "a", "text": "Falcon" },
+            { "id": "b", "text": "Columbia" },
+            { "id": "c", "text": "Eagle" },
+            { "id": "d", "text": "Challenger" }
+          ],
+          "difficulty": "easy",
+          "relatedToolId": "apollo-11-eagle",
+          "correctOptionId": "c",
+          "explanation": "Neil Armstrong and Buzz Aldrin landed in the lunar module Eagle on 20 July 1969. Columbia was the command module that stayed in orbit."
+        },
+        {
+          "id": "moon-q2",
+          "prompt": "How strong is gravity on the Moon compared with Earth?",
+          "options": [
+            { "id": "a", "text": "About one-sixth as strong" },
+            { "id": "b", "text": "About half as strong" },
+            { "id": "c", "text": "Exactly the same" },
+            { "id": "d", "text": "There is no gravity at all" }
+          ],
+          "difficulty": "easy",
+          "correctOptionId": "a",
+          "explanation": "The Moon's surface gravity is about one-sixth of Earth's, which is why astronauts could take long, bouncing steps."
+        },
+        {
+          "id": "moon-q3",
+          "prompt": "Which Apollo missions took a Lunar Roving Vehicle to the Moon?",
+          "options": [
+            { "id": "a", "text": "Apollo 11, 12 and 13" },
+            { "id": "b", "text": "Apollo 15, 16 and 17" },
+            { "id": "c", "text": "Apollo 8, 9 and 10" },
+            { "id": "d", "text": "Every Apollo mission" }
+          ],
+          "difficulty": "medium",
+          "relatedToolId": "lunar-roving-vehicle",
+          "correctOptionId": "b",
+          "explanation": "The rover flew on the last three Apollo missions, 15, 16 and 17, letting astronauts travel many kilometres from their lander."
+        },
+        {
+          "id": "moon-q4",
+          "prompt": "What do scientists use the retroreflectors left on the Moon for?",
+          "options": [
+            { "id": "a", "text": "Lighting up the Moon at night" },
+            { "id": "b", "text": "Sending television pictures to Earth" },
+            { "id": "c", "text": "Melting ice at the lunar poles" },
+            { "id": "d", "text": "Bouncing lasers back to measure the distance to the Moon" }
+          ],
+          "difficulty": "medium",
+          "relatedToolId": "laser-retroreflector",
+          "correctOptionId": "d",
+          "explanation": "Observatories fire laser pulses at the mirrors and time the round trip, which shows the Moon is moving away by about 3.8 cm a year."
+        },
+        {
+          "id": "moon-q5",
+          "prompt": "What is the name of the small rover carried by the Chandrayaan-3 Vikram lander?",
+          "options": [
+            { "id": "a", "text": "Pragyan" },
+            { "id": "b", "text": "Yutu" },
+            { "id": "c", "text": "Sojourner" },
+            { "id": "d", "text": "Lunokhod" }
+          ],
+          "difficulty": "hard",
+          "relatedToolId": "chandrayaan-3-vikram",
+          "correctOptionId": "a",
+          "explanation": "Vikram released the six-wheeled Pragyan rover after landing near the Moon's south pole in August 2023."
+        }
+      ]
+    }
+  ]
+}

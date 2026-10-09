@@ -1,0 +1,200 @@
+{
+  "_comment": "Values follow the NASA Planetary Fact Sheets (nssdc.gsfc.nasa.gov/planetary/factsheet). Rotation periods are positive magnitudes; retrograde spin is expressed by an axial tilt above 90 degrees. Keys starting with _ are ignored by the API.",
+  "bodies": [
+    {
+      "id": "sun",
+      "name": "Sun",
+      "type": "star",
+      "parentId": null,
+      "hasData": false,
+      "summary": "The Sun is the star at the centre of our solar system. Its gravity holds every planet in orbit and its light powers life on Earth.",
+      "facts": {
+        "radiusKm": 695700,
+        "distanceFromParentMillionKm": 0,
+        "orbitalPeriodDays": 0,
+        "rotationPeriodHours": 609.12,
+        "axialTiltDeg": 7.25
+      },
+      "_todo": [
+        "TODO verify: the Sun has no parent, so distanceFromParentMillionKm and orbitalPeriodDays are 0 by convention",
+        "TODO verify: rotationPeriodHours 609.12 is the sidereal period near the equator; the Sun rotates more slowly at the poles"
+      ],
+      "visual": { "colorHex": "#FDB813", "hasRings": false }
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Mercury is the smallest planet and the closest to the Sun. It has almost no atmosphere, so its surface swings between scorching days and freezing nights.",
+      "facts": {
+        "radiusKm": 2439.7,
+        "distanceFromParentMillionKm": 57.9,
+        "orbitalPeriodDays": 87.969,
+        "rotationPeriodHours": 1407.6,
+        "axialTiltDeg": 0.034
+      },
+      "visual": { "colorHex": "#8C8C8C", "hasRings": false }
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Venus is nearly the same size as Earth but is wrapped in thick clouds that trap heat, making it the hottest planet. It spins backwards compared with most planets.",
+      "facts": {
+        "radiusKm": 6051.8,
+        "distanceFromParentMillionKm": 108.2,
+        "orbitalPeriodDays": 224.701,
+        "rotationPeriodHours": 5832.5,
+        "axialTiltDeg": 177.4
+      },
+      "visual": { "colorHex": "#E6C27A", "hasRings": false }
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Earth is our home and the only world known to support life. Liquid water covers about 71 percent of its surface.",
+      "facts": {
+        "radiusKm": 6371.0,
+        "distanceFromParentMillionKm": 149.6,
+        "orbitalPeriodDays": 365.256,
+        "rotationPeriodHours": 23.9345,
+        "axialTiltDeg": 23.44
+      },
+      "visual": { "colorHex": "#2E6FD9", "hasRings": false }
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": true,
+      "summary": "Mars is a cold desert world coloured red by rusty dust. Robots have explored its surface for decades, searching for signs of ancient water and life.",
+      "facts": {
+        "radiusKm": 3389.5,
+        "distanceFromParentMillionKm": 228.0,
+        "orbitalPeriodDays": 686.98,
+        "rotationPeriodHours": 24.6229,
+        "axialTiltDeg": 25.19
+      },
+      "visual": { "colorHex": "#C1440E", "hasRings": false }
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Jupiter is the largest planet, a gas giant more than twice as massive as all the other planets combined. Its Great Red Spot is a storm wider than Earth.",
+      "facts": {
+        "radiusKm": 69911,
+        "distanceFromParentMillionKm": 778.5,
+        "orbitalPeriodDays": 4332.589,
+        "rotationPeriodHours": 9.925,
+        "axialTiltDeg": 3.13
+      },
+      "visual": { "colorHex": "#D8A570", "hasRings": false }
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Saturn is a gas giant famous for its bright, wide rings made of ice and rock. It is the second-largest planet in the solar system.",
+      "facts": {
+        "radiusKm": 58232,
+        "distanceFromParentMillionKm": 1432.0,
+        "orbitalPeriodDays": 10759.22,
+        "rotationPeriodHours": 10.656,
+        "axialTiltDeg": 26.73
+      },
+      "_todo": [
+        "TODO verify: distanceFromParentMillionKm differs between fact sheet revisions (1432.0 vs 1433.5)"
+      ],
+      "visual": { "colorHex": "#E3CF9B", "hasRings": true }
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Uranus is an ice giant that is tipped over so far it rolls around the Sun on its side. Methane in its atmosphere gives it a pale blue-green colour.",
+      "facts": {
+        "radiusKm": 25362,
+        "distanceFromParentMillionKm": 2867.0,
+        "orbitalPeriodDays": 30685.4,
+        "rotationPeriodHours": 17.24,
+        "axialTiltDeg": 97.77
+      },
+      "_todo": [
+        "TODO verify: distanceFromParentMillionKm differs between fact sheet revisions (2867.0 vs 2872.5)"
+      ],
+      "visual": { "colorHex": "#9AD9E0", "hasRings": false }
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "type": "planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Neptune is the most distant planet, a dark, cold ice giant with the fastest winds in the solar system. One trip around the Sun takes it about 165 Earth years.",
+      "facts": {
+        "radiusKm": 24622,
+        "distanceFromParentMillionKm": 4515.0,
+        "orbitalPeriodDays": 60189,
+        "rotationPeriodHours": 16.11,
+        "axialTiltDeg": 28.32
+      },
+      "_todo": [
+        "TODO verify: distanceFromParentMillionKm differs between fact sheet revisions (4515.0 vs 4495.1)"
+      ],
+      "visual": { "colorHex": "#3F54BA", "hasRings": false }
+    },
+    {
+      "id": "pluto",
+      "name": "Pluto",
+      "type": "dwarf-planet",
+      "parentId": "sun",
+      "hasData": false,
+      "summary": "Pluto is a small, icy dwarf planet in the Kuiper Belt. NASA's New Horizons spacecraft flew past it in 2015 and found mountains of ice and a heart-shaped plain.",
+      "facts": {
+        "radiusKm": 1188.3,
+        "distanceFromParentMillionKm": 5906.4,
+        "orbitalPeriodDays": 90560,
+        "rotationPeriodHours": 153.2928,
+        "axialTiltDeg": 122.53
+      },
+      "_todo": [
+        "TODO verify: axialTiltDeg is quoted as 122.53 (to its orbit) or 119.5 depending on the source"
+      ],
+      "visual": { "colorHex": "#C9B29B", "hasRings": false }
+    },
+    {
+      "id": "moon",
+      "name": "Moon",
+      "type": "moon",
+      "parentId": "earth",
+      "hasData": true,
+      "summary": "The Moon is Earth's only natural satellite, a grey, cratered world with no air to breathe. Twelve astronauts walked on it during the Apollo missions.",
+      "facts": {
+        "radiusKm": 1737.4,
+        "distanceFromParentMillionKm": 0.3844,
+        "orbitalPeriodDays": 27.3217,
+        "rotationPeriodHours": 655.72,
+        "axialTiltDeg": 6.68
+      },
+      "_todo": [
+        "TODO verify: axialTiltDeg 6.68 is measured against the Moon's orbit around Earth; against the ecliptic it is about 1.54"
+      ],
+      "visual": { "colorHex": "#BEBEBE", "hasRings": false }
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "_comment": "latDeg is north-positive and lonDeg is east-positive (-180..180). Image files live in public/images/tools. Keys starting with _ are ignored by the API.",
+  "tools": [
+    {
+      "id": "curiosity",
+      "bodyId": "mars",
+      "name": "Curiosity rover",
+      "modelType": "rover",
+      "year": 2012,
+      "agency": "NASA / JPL-Caltech",
+      "summary": "Curiosity is a car-sized rover that has been exploring Gale Crater since 2012, studying whether Mars once had the right conditions for tiny living things.",
+      "facts": [
+        "It landed in August 2012 using a rocket-powered 'sky crane' that lowered it on cables.",
+        "It is about the size of a small car and has a mass of roughly 900 kg.",
+        "A nuclear power source keeps it running day and night, even in dust storms.",
+        "It found evidence that Gale Crater once held a lake of liquid water.",
+        "Its ChemCam laser zaps rocks so scientists can learn what they are made of."
+      ],
+      "location": { "site": "Bradbury Landing, Gale Crater", "latDeg": -4.5895, "lonDeg": 137.4417 },
+      "images": {
+        "top": { "url": "/images/tools/curiosity-top.svg", "alt": "Placeholder card for the top view of the Curiosity rover", "caption": "Curiosity rover - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/curiosity-left.svg", "alt": "Placeholder card for the left view of the Curiosity rover", "caption": "Curiosity rover - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/curiosity-right.svg", "alt": "Placeholder card for the right view of the Curiosity rover", "caption": "Curiosity rover - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "perseverance",
+      "bodyId": "mars",
+      "name": "Perseverance rover",
+      "modelType": "rover",
+      "year": 2021,
+      "agency": "NASA / JPL-Caltech",
+      "summary": "Perseverance landed in Jezero Crater in 2021 to look for signs of ancient life and to collect rock samples that a future mission could bring back to Earth.",
+      "facts": [
+        "It landed on 18 February 2021 in Jezero Crater, which held a lake and river delta long ago.",
+        "It drills out rock cores and seals them in metal tubes for a possible return to Earth.",
+        "Its MOXIE experiment made oxygen from the carbon dioxide in the Martian air.",
+        "It carried the Ingenuity helicopter to Mars tucked under its belly.",
+        "Its microphones recorded the first sounds from the surface of Mars."
+      ],
+      "location": { "site": "Octavia E. Butler Landing, Jezero Crater", "latDeg": 18.4447, "lonDeg": 77.4508 },
+      "images": {
+        "top": { "url": "/images/tools/perseverance-top.svg", "alt": "Placeholder card for the top view of the Perseverance rover", "caption": "Perseverance rover - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/perseverance-left.svg", "alt": "Placeholder card for the left view of the Perseverance rover", "caption": "Perseverance rover - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/perseverance-right.svg", "alt": "Placeholder card for the right view of the Perseverance rover", "caption": "Perseverance rover - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "ingenuity",
+      "bodyId": "mars",
+      "name": "Ingenuity helicopter",
+      "modelType": "helicopter",
+      "year": 2021,
+      "agency": "NASA / JPL-Caltech",
+      "summary": "Ingenuity is a small robotic helicopter that proved powered flight is possible in the thin air of Mars. It was planned for 5 flights and ended up making 72.",
+      "facts": [
+        "On 19 April 2021 it made the first powered, controlled flight on another planet.",
+        "It has a mass of only about 1.8 kg, lighter than most laptops with their chargers.",
+        "Its blades spin far faster than those of helicopters on Earth because the Martian air is so thin.",
+        "It completed 72 flights before rotor damage ended its mission in January 2024.",
+        "It carried a tiny piece of fabric from the Wright brothers' first aeroplane."
+      ],
+      "location": { "site": "Wright Brothers Field, Jezero Crater", "latDeg": 18.44, "lonDeg": 77.45 },
+      "_todo": [
+        "TODO verify: Wright Brothers Field coordinates are approximate (first-flight airfield, a short drive from the Perseverance landing site)"
+      ],
+      "images": {
+        "top": { "url": "/images/tools/ingenuity-top.svg", "alt": "Placeholder card for the top view of the Ingenuity helicopter", "caption": "Ingenuity helicopter - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/ingenuity-left.svg", "alt": "Placeholder card for the left view of the Ingenuity helicopter", "caption": "Ingenuity helicopter - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/ingenuity-right.svg", "alt": "Placeholder card for the right view of the Ingenuity helicopter", "caption": "Ingenuity helicopter - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "insight",
+      "bodyId": "mars",
+      "name": "InSight lander",
+      "modelType": "lander",
+      "year": 2018,
+      "agency": "NASA / JPL-Caltech",
+      "summary": "InSight was a stationary lander that listened to the inside of Mars. Its seismometer recorded marsquakes, revealing the planet's crust, mantle and core.",
+      "facts": [
+        "It landed on the flat plains of Elysium Planitia on 26 November 2018.",
+        "Its seismometer detected more than 1,300 marsquakes.",
+        "It stayed in one place: it had no wheels, only a robotic arm.",
+        "Its data showed that Mars has a liquid core.",
+        "The mission ended in December 2022 after dust covered its solar panels."
+      ],
+      "location": { "site": "Elysium Planitia", "latDeg": 4.5024, "lonDeg": 135.6234 },
+      "images": {
+        "top": { "url": "/images/tools/insight-top.svg", "alt": "Placeholder card for the top view of the InSight lander", "caption": "InSight lander - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/insight-left.svg", "alt": "Placeholder card for the left view of the InSight lander", "caption": "InSight lander - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/insight-right.svg", "alt": "Placeholder card for the right view of the InSight lander", "caption": "InSight lander - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "apollo-11-eagle",
+      "bodyId": "moon",
+      "name": "Apollo 11 Lunar Module \"Eagle\"",
+      "modelType": "lander",
+      "year": 1969,
+      "agency": "NASA",
+      "summary": "Eagle is the spacecraft that carried Neil Armstrong and Buzz Aldrin to the Moon's surface on 20 July 1969, the first time people landed on another world.",
+      "facts": [
+        "It touched down in the Sea of Tranquility on 20 July 1969.",
+        "Armstrong and Aldrin spent about 21.5 hours on the surface.",
+        "Michael Collins stayed in orbit in the command module Columbia.",
+        "Its lower half, the descent stage, is still standing on the Moon today."
+      ],
+      "location": { "site": "Tranquility Base, Mare Tranquillitatis", "latDeg": 0.6741, "lonDeg": 23.473 },
+      "images": {
+        "top": { "url": "/images/tools/apollo-11-eagle-top.svg", "alt": "Placeholder card for the top view of the Apollo 11 Lunar Module Eagle", "caption": "Apollo 11 Lunar Module \"Eagle\" - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/apollo-11-eagle-left.svg", "alt": "Placeholder card for the left view of the Apollo 11 Lunar Module Eagle", "caption": "Apollo 11 Lunar Module \"Eagle\" - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/apollo-11-eagle-right.svg", "alt": "Placeholder card for the right view of the Apollo 11 Lunar Module Eagle", "caption": "Apollo 11 Lunar Module \"Eagle\" - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "lunar-roving-vehicle",
+      "bodyId": "moon",
+      "name": "Lunar Roving Vehicle",
+      "modelType": "lunar-rover",
+      "year": 1971,
+      "agency": "NASA",
+      "summary": "The Lunar Roving Vehicle was a battery-powered 'Moon buggy' that astronauts drove on Apollo 15, 16 and 17, letting them explore much farther from their lander.",
+      "facts": [
+        "It was first driven on the Moon in 1971 during Apollo 15.",
+        "It flew on three missions: Apollo 15, 16 and 17.",
+        "It folded up to fit on the side of the lunar module for the trip to the Moon.",
+        "It ran on electric batteries and its wheels were made of woven metal mesh, not rubber.",
+        "All three rovers were left behind and are still on the Moon."
+      ],
+      "location": { "site": "Hadley-Apennine (Apollo 15)", "latDeg": 26.1322, "lonDeg": 3.6339 },
+      "images": {
+        "top": { "url": "/images/tools/lunar-roving-vehicle-top.svg", "alt": "Placeholder card for the top view of the Lunar Roving Vehicle", "caption": "Lunar Roving Vehicle - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/lunar-roving-vehicle-left.svg", "alt": "Placeholder card for the left view of the Lunar Roving Vehicle", "caption": "Lunar Roving Vehicle - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/lunar-roving-vehicle-right.svg", "alt": "Placeholder card for the right view of the Lunar Roving Vehicle", "caption": "Lunar Roving Vehicle - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "laser-retroreflector",
+      "bodyId": "moon",
+      "name": "Apollo laser retroreflector",
+      "modelType": "instrument",
+      "year": 1971,
+      "agency": "NASA",
+      "summary": "Apollo astronauts left panels of special mirrors on the Moon. Scientists still bounce laser beams off them to measure the distance to the Moon very precisely.",
+      "facts": [
+        "Apollo 11, 14 and 15 each left a retroreflector array on the surface.",
+        "The Apollo 14 array, placed at Fra Mauro in 1971, holds 100 small glass prisms.",
+        "It needs no power, which is why it still works more than 50 years later.",
+        "The measurements show the Moon is drifting away from Earth by about 3.8 cm each year."
+      ],
+      "location": { "site": "Fra Mauro (Apollo 14)", "latDeg": -3.644, "lonDeg": -17.478 },
+      "_todo": [
+        "TODO verify: this entry is pinned to the Apollo 14 array so its hotspot does not overlap the Apollo 11 lander; confirm the Fra Mauro coordinates (-3.644, -17.478)"
+      ],
+      "images": {
+        "top": { "url": "/images/tools/laser-retroreflector-top.svg", "alt": "Placeholder card for the top view of the Apollo laser retroreflector", "caption": "Apollo laser retroreflector - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/laser-retroreflector-left.svg", "alt": "Placeholder card for the left view of the Apollo laser retroreflector", "caption": "Apollo laser retroreflector - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/laser-retroreflector-right.svg", "alt": "Placeholder card for the right view of the Apollo laser retroreflector", "caption": "Apollo laser retroreflector - right view", "credit": "Placeholder illustration" }
+      }
+    },
+    {
+      "id": "chandrayaan-3-vikram",
+      "bodyId": "moon",
+      "name": "Chandrayaan-3 Vikram lander",
+      "modelType": "lander",
+      "year": 2023,
+      "agency": "ISRO",
+      "summary": "Vikram is the Indian lander that touched down near the Moon's south pole in 2023, making India the fourth country to soft-land on the Moon.",
+      "facts": [
+        "It landed on 23 August 2023, closer to the lunar south pole than any earlier lander.",
+        "It carried a small six-wheeled rover named Pragyan.",
+        "It was built to work for one lunar day, which is about 14 Earth days.",
+        "Its instruments measured the temperature of the lunar soil near the south pole."
+      ],
+      "location": { "site": "Shiv Shakti Point, south polar region", "latDeg": -69.373, "lonDeg": 32.319 },
+      "_todo": [
+        "TODO verify: published coordinates vary slightly (ISRO first announced about -69.368, 32.348)"
+      ],
+      "images": {
+        "top": { "url": "/images/tools/chandrayaan-3-vikram-top.svg", "alt": "Placeholder card for the top view of the Chandrayaan-3 Vikram lander", "caption": "Chandrayaan-3 Vikram lander - top view", "credit": "Placeholder illustration" },
+        "left": { "url": "/images/tools/chandrayaan-3-vikram-left.svg", "alt": "Placeholder card for the left view of the Chandrayaan-3 Vikram lander", "caption": "Chandrayaan-3 Vikram lander - left view", "credit": "Placeholder illustration" },
+        "right": { "url": "/images/tools/chandrayaan-3-vikram-right.svg", "alt": "Placeholder card for the right view of the Chandrayaan-3 Vikram lander", "caption": "Chandrayaan-3 Vikram lander - right view", "credit": "Placeholder illustration" }
+      }
+    }
+  ]
+}
