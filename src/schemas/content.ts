@@ -55,6 +55,11 @@ export const toolSchema = z.object({
     lonDeg: z.number().min(-180).max(180),
   }),
   images: z.object({ top: imageSchema, left: imageSchema, right: imageSchema }),
+  // Optional transparent cut-out the front-end pins to the globe at `location`.
+  iconUrl: z
+    .string()
+    .regex(/^\/images\/[\w./-]+$/, "must be a path under /images/")
+    .optional(),
 });
 
 export const toolsFileSchema = z.object({ tools: z.array(toolSchema) });

@@ -145,6 +145,17 @@ describe("GET /api/tools/:toolId", () => {
     expect(res.body.facts.length).toBeLessThanOrEqual(5);
   });
 
+  it.each(["apollo-14-antares", "hasselblad-camera"])("%s is a Moon tool with a cut-out icon", async (id) => {
+    const res = await request(app).get(`/api/tools/${id}`);
+    expect(res.status).toBe(200);
+    expect(res.body.bodyId).toBe("moon");
+    expect(res.body.iconUrl).toMatch(/^\/images\/tools\/.+\.png$/);
+    expect(fs.existsSync(path.join(publicDir, res.body.iconUrl))).toBe(true);
+
+    const moon = await request(app).get("/api/bodies/moon");
+    expect(moon.body.tools.map((tool: { id: string }) => tool.id)).toContain(id);
+  });
+
   it("returns 404 for an unknown tool", async () => {
     const res = await request(app).get("/api/tools/sojourner-2");
     expect(res.status).toBe(404);

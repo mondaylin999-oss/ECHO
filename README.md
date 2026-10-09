@@ -136,7 +136,9 @@ curl -i -X POST http://localhost:3000/api/quiz/mars/answer \
 curl http://localhost:3000/images/tools/curiosity-top.svg
 ```
 
-Tool ids: `curiosity`, `perseverance`, `ingenuity`, `insight` (Mars); `apollo-11-eagle`, `lunar-roving-vehicle`, `laser-retroreflector`, `chandrayaan-3-vikram` (Moon).
+Tool ids: `curiosity`, `perseverance`, `ingenuity`, `insight` (Mars); `apollo-11-eagle`, `lunar-roving-vehicle`, `laser-retroreflector`, `chandrayaan-3-vikram`, `apollo-14-antares`, `hasselblad-camera` (Moon).
+
+A tool may also carry an optional `iconUrl`: a transparent cut-out image. The front-end pins tools that have one to the 3D globe at their `location` as clickable markers. It is an additive field; tools without it are unchanged.
 
 ## Replacing the placeholder images
 
@@ -179,5 +181,8 @@ The seed content was written from memory of published NASA and ISRO figures, wit
 | `tools.json` insight | "more than 1,300 marsquakes" | Final count is quoted as 1,319 |
 | `tools.json` curiosity | "roughly 900 kg" | Published mass is 899 kg |
 | `tools.json` apollo-11-eagle | "about 21.5 hours on the surface" | Commonly quoted as 21 h 36 min |
+
+| `tools.json` apollo-14-antares | -3.6453, -17.4714 | NASA's mission summary gives 3°40'27" S, 17°27'58" W (about -3.674, -17.466). The top image's source and credit are unconfirmed |
+| `tools.json` hasselblad-camera | 0.6741, 23.473 (Apollo 11 site) | The pictured camera's mission is not confirmed, so the location is an assumption. The photo's source, licence and credit are unconfirmed |
 
 Reference sources: NASA Planetary Fact Sheets (https://nssdc.gsfc.nasa.gov/planetary/factsheet/), NASA mission pages (https://science.nasa.gov), ISRO (https://www.isro.gov.in).

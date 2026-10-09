@@ -6,7 +6,7 @@ export type Body = {
   facts: { radiusKm: number; distanceFromParentMillionKm: number; orbitalPeriodDays: number; rotationPeriodHours: number; axialTiltDeg: number; meanSurfaceTempC: number | null };
   visual: { colorHex: string; hasRings: boolean };
 };
-export type Tool = { id: string; bodyId: string; name: string; modelType: 'rover'|'helicopter'|'lander'|'lunar-rover'|'instrument'; year: number; agency: string; summary: string; facts: string[]; location: { site: string; latDeg: number; lonDeg: number }; images: { top: Img; left: Img; right: Img } };
+export type Tool = { id: string; bodyId: string; name: string; modelType: 'rover'|'helicopter'|'lander'|'lunar-rover'|'instrument'; year: number; agency: string; summary: string; facts: string[]; location: { site: string; latDeg: number; lonDeg: number }; images: { top: Img; left: Img; right: Img }; iconUrl?: string };
 export type Img = { url: string; alt: string; caption: string; credit: string };
 export type QuizQuestion = { id: string; prompt: string; options: { id: string; text: string }[]; difficulty: string; relatedToolId?: string };
 const img = (title: string, color: string): Img => ({ url: `https://images.unsplash.com/photo-${color}?auto=format&fit=crop&w=900&q=80`, alt: title, caption: `${title} field image`, credit: 'NASA / Unsplash editorial placeholder' });
@@ -82,7 +82,7 @@ function toBody(api: ApiBody): Body {
 
 // Image URLs arrive as paths relative to the API origin.
 const withOrigin = (image: Img): Img => ({ ...image, url: image.url.startsWith('/') ? `${apiOrigin()}${image.url}` : image.url });
-const toTool = (tool: Tool): Tool => ({ ...tool, images: { top: withOrigin(tool.images.top), left: withOrigin(tool.images.left), right: withOrigin(tool.images.right) } });
+const toTool = (tool: Tool): Tool => ({ ...tool, ...(tool.iconUrl ? { iconUrl: tool.iconUrl.startsWith('/') ? `${apiOrigin()}${tool.iconUrl}` : tool.iconUrl } : {}), images: { top: withOrigin(tool.images.top), left: withOrigin(tool.images.left), right: withOrigin(tool.images.right) } });
 
 async function loadBodies(): Promise<{ live: boolean; bodies: Body[] }> {
   if (useMocks) return { live: false, bodies: mockBodies };

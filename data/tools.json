@@ -182,6 +182,96 @@
         "left": { "url": "/images/tools/chandrayaan-3-vikram-left.svg", "alt": "Placeholder card for the left view of the Chandrayaan-3 Vikram lander", "caption": "Chandrayaan-3 Vikram lander - left view", "credit": "Placeholder illustration" },
         "right": { "url": "/images/tools/chandrayaan-3-vikram-right.svg", "alt": "Placeholder card for the right view of the Chandrayaan-3 Vikram lander", "caption": "Chandrayaan-3 Vikram lander - right view", "credit": "Placeholder illustration" }
       }
+    },
+    {
+      "id": "apollo-14-antares",
+      "bodyId": "moon",
+      "name": "Apollo 14 Lunar Module \"Antares\"",
+      "modelType": "lander",
+      "year": 1971,
+      "agency": "NASA",
+      "summary": "Antares is the lunar module that landed Alan Shepard and Edgar Mitchell in the hilly Fra Mauro region in February 1971, on the third crewed Moon landing.",
+      "facts": [
+        "It landed at Fra Mauro on 5 February 1971.",
+        "Shepard and Mitchell spent about 33 hours on the surface and made two moonwalks.",
+        "The crew pulled a two-wheeled cart to carry tools and rock samples.",
+        "Stuart Roosa stayed in orbit in the command module Kitty Hawk."
+      ],
+      "location": {
+        "site": "Fra Mauro (Apollo 14)",
+        "latDeg": -3.6453,
+        "lonDeg": -17.4714
+      },
+      "_todo": [
+        "TODO verify: coordinates are the commonly published LRO-era values; NASA's Apollo 14 mission summary gives 3 deg 40 min 27 s S, 17 deg 27 min 58 s W (about -3.674, -17.466)",
+        "TODO verify: the top image was supplied by the project owner as a photo of Antares; confirm its source and credit line"
+      ],
+      "images": {
+        "top": {
+          "url": "/images/tools/apollo-14-antares-top.png",
+          "alt": "A lunar module seen from directly above, with its four gold landing footpads at the corners",
+          "caption": "Lunar module \"Antares\" seen from above, background removed",
+          "credit": "NASA (credit to be confirmed)"
+        },
+        "left": {
+          "url": "/images/tools/apollo-14-antares-left.svg",
+          "alt": "Placeholder card for the left view of the Apollo 14 Lunar Module Antares",
+          "caption": "Apollo 14 Lunar Module Antares - left view",
+          "credit": "Placeholder illustration"
+        },
+        "right": {
+          "url": "/images/tools/apollo-14-antares-right.svg",
+          "alt": "Placeholder card for the right view of the Apollo 14 Lunar Module Antares",
+          "caption": "Apollo 14 Lunar Module Antares - right view",
+          "credit": "Placeholder illustration"
+        }
+      },
+      "iconUrl": "/images/tools/apollo-14-antares-top.png"
+    },
+    {
+      "id": "hasselblad-camera",
+      "bodyId": "moon",
+      "name": "Hasselblad lunar camera",
+      "modelType": "instrument",
+      "year": 1969,
+      "agency": "NASA / Hasselblad",
+      "summary": "Apollo astronauts photographed the Moon with specially modified Hasselblad cameras that used wide 70 mm film. Almost every famous picture from the lunar surface was taken with one.",
+      "facts": [
+        "Apollo crews used modified Hasselblad 500EL cameras loaded with 70 mm film.",
+        "The cameras used on the surface had no viewfinder: astronauts wore them on the chest and aimed by turning their bodies.",
+        "To save weight for Moon rocks, crews left the camera bodies on the Moon and brought home only the film magazines.",
+        "Each film magazine was marked with a letter, and a label on top listed the settings for sunlight and shadow."
+      ],
+      "location": {
+        "site": "Tranquility Base (Apollo 11)",
+        "latDeg": 0.6741,
+        "lonDeg": 23.473
+      },
+      "_todo": [
+        "TODO verify: the pictured camera's mission is not confirmed; it is pinned to the Apollo 11 site as the first place these cameras were used on the surface, which puts it on top of the Eagle hotspot",
+        "TODO verify: source, licence and credit line of the supplied photo (it looks like a museum studio photograph, which may not be free to reuse)"
+      ],
+      "images": {
+        "top": {
+          "url": "/images/tools/hasselblad-camera-top.png",
+          "alt": "A black Hasselblad camera with a large lens between two silver film magazines carrying orange exposure labels",
+          "caption": "Hasselblad camera with two film magazines, background removed",
+          "credit": "Source to be confirmed"
+        },
+        "left": {
+          "url": "/images/tools/hasselblad-camera-left.svg",
+          "alt": "Placeholder card for the left view of the Hasselblad lunar camera",
+          "caption": "Hasselblad lunar camera - left view",
+          "credit": "Placeholder illustration"
+        },
+        "right": {
+          "url": "/images/tools/hasselblad-camera-right.svg",
+          "alt": "Placeholder card for the right view of the Hasselblad lunar camera",
+          "caption": "Hasselblad lunar camera - right view",
+          "credit": "Placeholder illustration"
+        }
+      },
+      "iconUrl": "/images/tools/hasselblad-camera-top.png"
     }
   ]
 }
