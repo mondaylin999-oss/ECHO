@@ -81,7 +81,8 @@
           "caption": "Perseverance rover - right view",
           "credit": "Placeholder illustration"
         }
-      }
+      },
+      "modelUrl": "/models/perseverance.glb"
     },
     {
       "id": "ingenuity",
@@ -126,7 +127,8 @@
           "credit": "NASA / JPL-Caltech"
         }
       },
-      "iconUrl": "/images/tools/ingenuity-cutout.png"
+      "iconUrl": "/images/tools/ingenuity-cutout.png",
+      "modelUrl": "/models/ingenuity.glb"
     },
     {
       "id": "insight",
@@ -168,7 +170,8 @@
           "credit": "NASA / JPL-Caltech / University of Arizona"
         }
       },
-      "iconUrl": "/images/tools/insight-cutout.png"
+      "iconUrl": "/images/tools/insight-cutout.png",
+      "modelUrl": "/models/insight.glb"
     },
     {
       "id": "apollo-11-eagle",
@@ -208,7 +211,8 @@
           "caption": "Apollo 11 Lunar Module \"Eagle\" - right view",
           "credit": "Placeholder illustration"
         }
-      }
+      },
+      "modelUrl": "/models/apollo-lunar-module.glb"
     },
     {
       "id": "lunar-roving-vehicle",
@@ -380,7 +384,8 @@
           "credit": "NASA / LRO"
         }
       },
-      "iconUrl": "/images/tools/apollo-14-antares-top.png"
+      "iconUrl": "/images/tools/apollo-14-antares-top.png",
+      "modelUrl": "/models/apollo-lunar-module.glb"
     },
     {
       "id": "hasselblad-camera",

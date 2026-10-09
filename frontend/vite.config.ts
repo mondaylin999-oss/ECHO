@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 // The API (Express) listens on 3000; the dev server proxies to it so the app
 // can call /api and /images on its own origin.
 const api = process.env.VITE_DEV_API_TARGET || 'http://localhost:3000';
-const proxy = { '/api': api, '/images': api };
+const proxy = { '/api': api, '/images': api, '/models': api };
 
 export default defineConfig({
   server: { port: 5173, host: '0.0.0.0', proxy },

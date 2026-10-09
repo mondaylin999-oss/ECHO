@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { answerQuiz, bodies, isLive, getBody, getClimate, getCredits, getDatasets, getFires, getImagery, getQuiz, getScript, searchData, type Body, type Tool } from './api';
 import { state, transition, subscribe } from './state';
 import './styles/main.css';
@@ -137,7 +140,26 @@ function openTool(body:Body,tool:Tool){ toolMarkers.length=0; focusCanvas.style.
   const obj=el('div','', tool.iconUrl?'stage-view spin':'stage-view'); const main=document.createElement('img'); main.src=tool.iconUrl||tool.images.top.url; main.alt=tool.iconUrl?`${tool.name}, rotating 3D view`:tool.images.top.alt; main.className=tool.iconUrl?'stage-cutout':'stage-photo'; if(!tool.iconUrl)main.onclick=()=>openLightbox(tool.images.top.url,tool.images.top.alt); obj.append(main);
   const info=el('div',''), meta=el('div','', 'tv-meta'); const quizButton=button('Quiz','button primary'); quizButton.onclick=()=>openQuiz(body); meta.append(fact('YEAR',String(tool.year)),fact('AGENCY',tool.agency),quizButton); info.append(el('div','MISSION INSTRUMENT','eyebrow'),el('h2',tool.name),el('p',tool.summary,'summary'),meta);
   const list=el('ul'); for(const f of tool.facts)list.append(el('li',f)); const text=el('section','', 'tv-text'); text.append(info,list);
-  const centre=el('div','', 'tv-centre'); centre.append(obj,text); const stage=el('section','', 'tool-stage'); stage.append(left,centre,right); ui.append(stage); }
+  const centre=el('div','', 'tv-centre'); centre.append(obj,text); const stage=el('section','', 'tool-stage'); stage.append(left,centre,right); ui.append(stage); if(tool.modelUrl)mountModelViewer(obj,tool.modelUrl); }
+// Real NASA 3D model in its own small WebGL view: it turns by itself, drag to rotate, wheel to zoom.
+// While it loads (or if it fails) the photo cut-out stays in its place.
+function mountModelViewer(host:HTMLElement,url:string){
+  let renderer:THREE.WebGLRenderer; try { renderer=new THREE.WebGLRenderer({antialias:true,alpha:true}); } catch(err) { console.warn('3D viewer unavailable, showing the photo instead',err); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2)); renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.domElement.className='model-canvas';
+  const scene=new THREE.Scene(), pmrem=new THREE.PMREMGenerator(renderer); scene.environment=pmrem.fromScene(new RoomEnvironment(),0.04).texture;
+  const camera=new THREE.PerspectiveCamera(35,1,0.1,100); camera.position.set(0,1.2,6);
+  const sun=new THREE.DirectionalLight(0xffffff,2.2); sun.position.set(3,4,5); scene.add(new THREE.AmbientLight(0xffffff,0.4),sun);
+  const controls=new OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.enablePan=false; controls.autoRotate=true; controls.autoRotateSpeed=2.4; controls.minDistance=2; controls.maxDistance=11;
+  let alive=true;
+  const dispose=()=>{ alive=false; controls.dispose(); scene.traverse(o=>{ const m=o as THREE.Mesh; if(m.geometry)m.geometry.dispose(); const mat=m.material as THREE.Material|THREE.Material[]|undefined; (Array.isArray(mat)?mat:mat?[mat]:[]).forEach(x=>{ Object.values(x).forEach(v=>{ if(v instanceof THREE.Texture)v.dispose(); }); x.dispose(); }); }); pmrem.dispose(); renderer.dispose(); renderer.domElement.remove(); };
+  const draco=new DRACOLoader().setDecoderPath('/draco/'); const gltfLoader=new GLTFLoader().setDRACOLoader(draco);
+  gltfLoader.load(url,gltf=>{ draco.dispose(); if(!alive||!host.isConnected){ dispose(); return; }
+    const model=gltf.scene, box=new THREE.Box3().setFromObject(model), size=box.getSize(new THREE.Vector3()), centre=box.getCenter(new THREE.Vector3()); model.position.sub(centre);
+    const wrap=new THREE.Group(); wrap.add(model); wrap.scale.setScalar(3.6/Math.max(size.x,size.y,size.z)); scene.add(wrap);
+    host.append(renderer.domElement,el('span','3D model: NASA 3D Resources','model-credit')); host.classList.add('model-ready'); },undefined,err=>{ console.warn('3D model failed to load, showing the photo instead',url,err); draco.dispose(); dispose(); });
+  const loop=()=>{ if(!alive)return; if(!host.isConnected){ dispose(); return; } const w=host.clientWidth,h=host.clientHeight; if(w&&h&&(renderer.domElement.width!==Math.round(w*renderer.getPixelRatio())||renderer.domElement.height!==Math.round(h*renderer.getPixelRatio()))){ renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); } controls.update(); renderer.render(scene,camera); requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+}
 function openLightbox(src:string,alt:string){const modal=el('div','', 'modal-backdrop'); const box=el('div','', 'lightbox'); const close=button('×','icon-button'); close.onclick=()=>modal.remove(); const im=document.createElement('img');im.src=src;im.alt=alt;box.append(close,im);modal.append(box);ui.append(modal);}
 
 let quizBody:Body|null=null, quizQuestions:any[]=[], quizIndex=0, quizScore=0;

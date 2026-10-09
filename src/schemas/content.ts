@@ -60,6 +60,11 @@ export const toolSchema = z.object({
     .string()
     .regex(/^\/images\/[\w./-]+$/, "must be a path under /images/")
     .optional(),
+  // Optional real 3D model (glb) the front-end shows rotating on the tool screen.
+  modelUrl: z
+    .string()
+    .regex(/^\/models\/[\w.-]+\.glb$/, "must be a .glb path under /models/")
+    .optional(),
 });
 
 export const toolsFileSchema = z.object({ tools: z.array(toolSchema) });
