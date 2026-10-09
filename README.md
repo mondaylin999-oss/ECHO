@@ -49,6 +49,8 @@ What is live and what is still mocked in `frontend/src/api/index.ts`:
 | Earth imagery, active fires, climate probe, data search, dataset links, credits, Earth quiz | Built-in fixtures (the API does not serve these yet) |
 | "Mean temp" fact | Shows "No data" (the API has no `meanSurfaceTempC` field) |
 
+Planet, Moon and Sun textures in `frontend/public/textures/` come from Solar System Scope (https://www.solarsystemscope.com/textures/) under CC BY 4.0, which requires attribution; see `frontend/REAL_TEXTURE_SOURCES.md`.
+
 If the API cannot be reached when the page loads, or `VITE_USE_MOCKS=true` is set, the client falls back to its fixtures for everything; the pill in the top-right corner reads "LIVE API" or "MOCK DATA" until the first view change.
 
 ## Deploying to Vercel
