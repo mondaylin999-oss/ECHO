@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Solar System Explorer - API tester</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: system-ui, Arial, sans-serif; background: #0b1020; color: #e8ecf5; }
+      header { padding: 16px 24px; border-bottom: 1px solid #263052; }
+      h1 { margin: 0; font-size: 20px; }
+      header p { margin: 4px 0 0; color: #9aa6c7; font-size: 13px; }
+      main { display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 24px; }
+      h2 { font-size: 15px; margin: 0 0 10px; color: #9aa6c7; text-transform: uppercase; letter-spacing: 1px; }
+      h3 { margin: 0 0 6px; }
+      button { font: inherit; color: inherit; cursor: pointer; background: #18203a; border: 1px solid #2c3963; border-radius: 8px; padding: 8px 12px; }
+      button:hover { border-color: #6f8cff; }
+      button.active { border-color: #6f8cff; background: #22305c; }
+      #bodies button { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 6px; text-align: left; }
+      .dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+      .tag { font-size: 11px; background: #2d7a4f; border-radius: 10px; padding: 1px 7px; margin-left: auto; }
+      section { background: #121a33; border: 1px solid #263052; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+      table { border-collapse: collapse; margin-top: 8px; }
+      td { padding: 3px 14px 3px 0; font-size: 14px; }
+      td:first-child { color: #9aa6c7; }
+      .row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .images { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+      figure { margin: 0; }
+      figure img { width: 100%; border-radius: 8px; display: block; }
+      figcaption { font-size: 12px; color: #9aa6c7; margin-top: 4px; }
+      .question { margin-bottom: 16px; }
+      .result { margin-top: 6px; font-size: 14px; }
+      .ok { color: #6fe39b; }
+      .bad { color: #ff8c8c; }
+      .muted { color: #9aa6c7; font-size: 13px; }
+      pre { background: #0b1020; border-radius: 8px; padding: 10px; overflow: auto; font-size: 12px; max-height: 260px; }
+      @media (max-width: 760px) { main { grid-template-columns: 1fr; } .images { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Solar System Explorer - API tester</h1>
+      <p>A plain page for checking the API by hand. It is not the real front-end.</p>
+    </header>
+    <main>
+      <aside>
+        <h2>Bodies</h2>
+        <div id="bodies"></div>
+        <button id="script-button" style="width: 100%; margin-top: 10px">Astronaut script</button>
+      </aside>
+      <div id="content">
+        <section><p class="muted">Pick a body on the left.</p></section>
+      </div>
+    </main>
+    <script src="tester.js"></script>
+  </body>
+</html>
