@@ -138,7 +138,7 @@ curl http://localhost:3000/images/tools/curiosity-top.svg
 
 Tool ids: `curiosity`, `perseverance`, `ingenuity`, `insight` (Mars); `apollo-11-eagle`, `lunar-roving-vehicle`, `laser-retroreflector`, `chandrayaan-3-vikram`, `apollo-14-antares`, `hasselblad-camera` (Moon).
 
-A tool may also carry an optional `iconUrl`: a transparent cut-out image. The front-end pins tools that have one to the 3D globe at their `location` as clickable markers. It is an additive field; tools without it are unchanged.
+A tool may also carry an optional `iconUrl`: a transparent cut-out image. The front-end pins every tool to the 3D globe at its `location` as a clickable pin with a name tag, and shows the cut-out above the pin for tools that have one. It is an additive field; tools without it are unchanged.
 
 ## Replacing the placeholder images
 
