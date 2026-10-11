@@ -1,188 +1,120 @@
-# Solar System Explorer API
+# ECHO · Solar System Explorer
 
-REST back-end for Solar System Explorer, an educational 3D web app. It serves basic facts for 11 solar system bodies, deep content for Mars and the Moon (surface tools, three images per tool, a quiz) and the script for the astronaut narrator.
+![ECHO intro screen: the Sun, orbiting planets and the astronaut guide](docs/echo-intro.webp)
 
-Node.js 20+, Express 5, TypeScript, zod. Content lives in JSON files under `data/`; there is no database.
+ECHO is an educational web app that turns NASA mission data into a guided 3D field trip. Fly through the solar system, open the Moon or Mars, and meet the machines humans left there: where each one landed, what it did, and whether it can still contribute. Every claim is labelled **Known**, **Inferred** or **Unknown**, with links back to NASA datasets.
 
-## Setup
+**Live site:** https://nasa-psi-three.vercel.app
+
+## What you can do
+
+- **Explore a 3D solar system** with real NASA planet textures, drifting meteoroids, a skippable intro and an astronaut guide who narrates.
+- **Open any world** to see its facts, hotspots and layers, then jump into the Moon or Mars.
+- **Find the tools on the globe.** Every Moon and Mars tool is pinned at its real latitude and longitude with a clickable name tag.
+- **Inspect a tool in 3D.** The tool screen shows the machine rotating in the centre (drag to turn it, wheel to zoom), real photographs on either side, and the story below it.
+  - Real NASA 3D models: Apollo Lunar Module (Antares, Eagle), InSight, Ingenuity, Perseverance.
+  - A 3D Hasselblad Data Camera built by this team from reference photos, because no free scan exists.
+  - Tools without a 3D model show their photo cut-out instead.
+- **Dig into the evidence.** Dataset drawers link to NASA catalogs, and an Earthdata search finds more.
+- **Test yourself** with a quiz per world.
+- **Read the mind-maps.** Radial pages for Apollo 14 Antares, the Apollo 11 Hasselblad camera and InSight connect "What is this", "Mission timeline", "Discover the legacy" and "Can it still contribute?", with editable Known / Inferred / Unknown notes and replaceable images.
+  - Apollo: `/mindmap/index.html` (toggle between Antares and the Hasselblad camera)
+  - InSight: `/mindmap/mars.html`
+
+## How it is built
+
+```
+Browser ─ Vite + TypeScript + three.js (frontend/)
+   │       3D scene, tool screens, quiz, guide
+   │       /mindmap/* are standalone React + Tailwind pages (loaded from CDNs)
+   │  fetch /api/...
+   ▼
+Vercel serverless ─ api/index.js ─► compiled Express 5 app (src/)
+                    routes → controllers → services → content store
+                    helmet, CORS, rate limit, zod validation
+                              │
+                              ▼
+                    data/*.json  (bodies, tools, quiz, astronaut script)
+```
+
+Node.js 20+, Express 5, TypeScript, zod and vitest on the back end. There is no database: content lives in JSON files under `data/`, validated at startup.
+
+## Run it locally
 
 ```bash
 npm install
-cp .env.example .env
-npm run dev
+npm run dev                    # API on http://localhost:3000
+pnpm --dir frontend install
+pnpm --dir frontend dev        # app on http://localhost:5173
 ```
 
-The API is then at `http://localhost:3000`.
+Copy `.env.example` to `.env` if you want to change the defaults.
 
 | Variable      | Default                 | Purpose                                                        |
 | ------------- | ----------------------- | -------------------------------------------------------------- |
-| `PORT`        | `3000`                  | Port to listen on                                              |
+| `PORT`        | `3000`                  | Port the API listens on                                        |
 | `CORS_ORIGIN` | `http://localhost:5173` | Origin allowed by CORS. Comma-separate to allow more than one. |
 
-## Scripts
+The Vite dev server proxies `/api`, `/images` and `/models` to the API, so no CORS setup is needed locally. For a separately hosted front end, set `VITE_API_BASE_URL` to the API origin and add the site to `CORS_ORIGIN`.
 
-| Script                          | What it does                                                    |
-| ------------------------------- | --------------------------------------------------------------- |
-| `npm run dev`                   | Start with reload on change (tsx)                               |
-| `npm run build`                 | Compile `src/` to `dist/`                                       |
-| `npm start`                     | Run the compiled server (`npm run build` first)                 |
-| `npm test`                      | Run the vitest + supertest suite (no network needed)            |
-| `npm run generate:placeholders` | Regenerate the SVG placeholder cards in `public/images/tools/`  |
+| Script                          | What it does                                                   |
+| ------------------------------- | -------------------------------------------------------------- |
+| `npm run dev`                   | Start the API with reload on change                            |
+| `npm run build`                 | Compile `src/` to `dist/`                                      |
+| `npm start`                     | Run the compiled server                                        |
+| `npm test`                      | Run the vitest + supertest suite (44 tests, no network needed) |
+| `npm run generate:placeholders` | Regenerate the SVG placeholder cards for tools without photos  |
 
-## Front-end
+## Deploying
 
-The 3D client (Vite + TypeScript + Three.js) lives in `frontend/` as its own package, managed with pnpm.
+`vercel.json` deploys the whole repository as one Vercel project: the front-end build is the static site, `public/` (images, 3D models) is copied next to it, and `api/index.js` serves `/api/*`. No environment variables are needed because the site and API share one origin. The rate limit is counted per function instance there, so it is approximate.
 
-```bash
-npm run dev                  # API on http://localhost:3000
-pnpm --dir frontend install
-pnpm --dir frontend dev      # app on http://localhost:5173
-```
+Commits must use an email that GitHub can match to your account (for example your `...@users.noreply.github.com` address), or Vercel blocks the deployment.
 
-The Vite dev server proxies `/api` and `/images` to the API, so no CORS setup is needed locally. For a deployed build, set `VITE_API_BASE_URL` to the API origin and add the site's origin to `CORS_ORIGIN`.
+## API
 
-What is live and what is still mocked in `frontend/src/api/index.ts`:
-
-| Feature | Source |
+| Endpoint | Returns |
 | --- | --- |
-| Bodies, Mars and Moon tools, tool images, astronaut script, Mars and Moon quizzes | This API |
-| Earth imagery, active fires, climate probe, data search, dataset links, credits, Earth quiz | Built-in fixtures (the API does not serve these yet) |
-| "Mean temp" fact | Shows "No data" (the API has no `meanSurfaceTempC` field) |
-
-Planet, Moon and Sun textures in `frontend/public/textures/` come from Solar System Scope (https://www.solarsystemscope.com/textures/) under CC BY 4.0, which requires attribution; see `frontend/REAL_TEXTURE_SOURCES.md`.
-
-If the API cannot be reached when the page loads, or `VITE_USE_MOCKS=true` is set, the client falls back to its fixtures for everything; the pill in the top-right corner reads "LIVE API" or "MOCK DATA" until the first view change.
-
-## Deploying to Vercel
-
-`vercel.json` deploys the whole repository as one project: the front-end build is the static site, `public/` (tool images, tester page) is copied next to it, and `api/index.js` runs the compiled Express app as a serverless function for `/api/*`. Import the repository in Vercel and deploy; no settings or environment variables are needed, because the app and API share one origin. The rate limit is counted per function instance there, so it is approximate.
-
-## Project layout
-
-```
-data/         seed content (bodies, tools, quiz, astronaut script)
-public/       static files; public/images/... is served at /images/...
-scripts/      generate-placeholders.ts
-src/
-  routes/       URL -> controller wiring
-  controllers/  HTTP in/out
-  services/     content loading and lookups
-  schemas/      zod schemas for data files and request bodies
-  middleware/   validation, rate limiting, error handling
-tests/
-```
-
-## Behaviour worth knowing
-
-- **Errors** always look like `{ "error": { "code": string, "message": string } }`. Codes: `NOT_FOUND` (404), `VALIDATION_ERROR` and `INVALID_JSON` (400), `PAYLOAD_TOO_LARGE` (413), `RATE_LIMITED` (429), `INTERNAL_ERROR` (500).
-- **Startup validation.** Every file in `data/` is parsed with zod and cross-checked (parent ids, tool ids referenced by quizzes, correct option present, `hasData` only on Mars and the Moon). If anything is wrong the server prints the file and field and exits with code 1.
-- **Quiz answers** are held server-side. `GET /api/quiz/:bodyId` builds each question from a fixed list of public fields, so `correctOptionId` and `explanation` only ever leave through `POST /api/quiz/:bodyId/answer`.
-- **Rate limit:** 100 requests per 15 minutes per IP on `/api/*`. Static images are not counted, since one tool screen loads three of them.
-- **CORS** is limited to `CORS_ORIGIN`. Images are sent with `Cross-Origin-Resource-Policy: cross-origin` so the front-end can display them from another origin.
-- **Image URLs** in responses are paths relative to the API origin (`/images/tools/curiosity-top.svg`). The front-end prefixes its API base URL.
-- If the API is deployed behind a reverse proxy, set Express's `trust proxy` in `src/app.ts`, otherwise every client shares the proxy's IP for rate limiting.
-
-### Data conventions
-
-- `location.latDeg` is north-positive; `location.lonDeg` is east-positive in the range -180 to 180.
-- `rotationPeriodHours` is always a positive magnitude. Retrograde rotation (Venus, Uranus, Pluto) is expressed by `axialTiltDeg` above 90, so a renderer should apply the tilt and spin in the normal direction, not flip the spin as well.
-- The Sun has `parentId: null`, with `distanceFromParentMillionKm` and `orbitalPeriodDays` set to `0`.
-- `visual.hasRings` is a rendering hint and is `true` only for Saturn. Jupiter, Uranus and Neptune have faint rings that are not visible at this scale.
-- Keys starting with `_` in the data files (`_comment`, `_todo`) are notes for maintainers. JSON has no comments, so TODOs are stored this way; they are stripped when the data is loaded and never appear in a response.
-
-## Endpoints and curl examples
-
-```bash
-# Health
-curl http://localhost:3000/api/health
-# -> { "status": "ok" }
-
-# Astronaut script
-curl http://localhost:3000/api/astronaut/script
-# -> { "speaker": "Astro", "lines": [ { "id": "line-1", "text": "..." } ], "endPrompt": "Tap to continue" }
-
-# All 11 bodies
-curl http://localhost:3000/api/bodies
-# -> { "bodies": [ Body, ... ] }
-
-# One body, plus its tool summaries (empty array unless hasData is true)
-curl http://localhost:3000/api/bodies/mars
-curl http://localhost:3000/api/bodies/jupiter
-curl -i http://localhost:3000/api/bodies/vulcan      # 404
-
-# One tool
-curl http://localhost:3000/api/tools/curiosity
-curl -i http://localhost:3000/api/tools/unknown      # 404
-
-# Quiz questions (no answers). Only mars and moon; anything else is 404.
-curl http://localhost:3000/api/quiz/moon
-curl -i http://localhost:3000/api/quiz/earth         # 404
-
-# Check an answer
-curl -X POST http://localhost:3000/api/quiz/mars/answer \
-  -H "Content-Type: application/json" \
-  -d '{"questionId":"mars-q1","optionId":"b"}'
-# -> { "correct": true, "correctOptionId": "b", "explanation": "..." }
-
-# 400: invalid input (missing field, malformed JSON, or an optionId the question does not have)
-curl -i -X POST http://localhost:3000/api/quiz/mars/answer \
-  -H "Content-Type: application/json" -d '{"questionId":"mars-q1"}'
-
-# 404: unknown question
-curl -i -X POST http://localhost:3000/api/quiz/mars/answer \
-  -H "Content-Type: application/json" -d '{"questionId":"mars-q99","optionId":"a"}'
-
-# A tool image
-curl http://localhost:3000/images/tools/curiosity-top.svg
-```
+| `GET /api/health` | `{ "status": "ok" }` |
+| `GET /api/astronaut/script` | The narrator's lines |
+| `GET /api/bodies` | All 11 bodies |
+| `GET /api/bodies/:id` | One body plus its tool summaries (only Mars and the Moon have tools) |
+| `GET /api/tools/:toolId` | One tool: facts, location, three images, optional `iconUrl` and `modelUrl` |
+| `GET /api/quiz/:bodyId` | Quiz questions without answers (Mars and Moon) |
+| `POST /api/quiz/:bodyId/answer` | `{ questionId, optionId }` → `{ correct, correctOptionId, explanation }` |
 
 Tool ids: `curiosity`, `perseverance`, `ingenuity`, `insight` (Mars); `apollo-11-eagle`, `lunar-roving-vehicle`, `laser-retroreflector`, `chandrayaan-3-vikram`, `apollo-14-antares`, `hasselblad-camera` (Moon).
 
-A tool may also carry an optional `iconUrl`: a transparent cut-out image. The front-end pins every tool to the 3D globe at its `location` as a clickable pin with a name tag, and shows the cut-out above the pin for tools that have one. It is an additive field; tools without it are unchanged.
+Behaviour worth knowing:
 
-## Replacing the placeholder images
+- **Errors** look like `{ "error": { "code", "message" } }` with `NOT_FOUND`, `VALIDATION_ERROR`, `INVALID_JSON`, `PAYLOAD_TOO_LARGE`, `RATE_LIMITED` or `INTERNAL_ERROR`.
+- **Startup validation:** every file in `data/` is parsed with zod and cross-checked. If anything is wrong the server prints the file and field and exits with code 1.
+- **Quiz answers** stay on the server; only the answer endpoint reveals `correctOptionId` and `explanation`.
+- **Rate limit:** 100 requests per 15 minutes per IP on `/api/*`. Static files are not counted. Heavy clicking around the app can hit it, and the API then answers 429 until the window resets.
+- **Paths** in responses (`/images/...`, `/models/...`) are relative to the API origin.
 
-Each tool has three images, `top`, `left` and `right`, stored as `public/images/tools/<tool-id>-<view>.svg`. They are generated cards, and their `credit` is "Placeholder illustration".
+## Content and media
 
-To swap in a real photo:
+- `data/tools.json` holds every tool. `images.top`, `left` and `right` are photos or placeholders, `iconUrl` is a transparent cut-out pinned on the globe, and `modelUrl` is an optional `.glb` under `/models/`.
+- Real photos are in place for Antares, the Hasselblad camera, InSight and Ingenuity. The other tools still use generated placeholder cards (their `credit` says "Placeholder illustration"). To replace one: add the file to `public/images/tools/`, update the `url`, `alt`, `caption` and `credit` in `data/tools.json`, and run `npm test`, which checks that every referenced file exists.
+- 3D models are in `public/models/` and use Draco compression, so the front end self-hosts the decoder in `frontend/public/draco/`.
+- Keys starting with `_` in the data files are maintainer notes and are stripped when loaded.
+- `location.latDeg` is north-positive and `lonDeg` is east-positive (−180 to 180). Retrograde rotation (Venus, Uranus, Pluto) is expressed by an `axialTiltDeg` above 90, so renderers should not also flip the spin.
 
-1. Put the file in `public/images/tools/` using the same base name, e.g. `curiosity-top.jpg`.
-2. In `data/tools.json`, update that image's `url` extension if it changed, and write a real `alt`, `caption` and `credit`.
-3. Delete the old `.svg`.
-4. Run `npm test`, which checks that every image file referenced by the data exists.
+## Credits and licences
 
-`npm run generate:placeholders` only writes files for `.svg` URLs, so it will not overwrite real images.
+- **Planet, Moon and Sun textures:** Solar System Scope, CC BY 4.0 (https://www.solarsystemscope.com/textures/). See `frontend/REAL_TEXTURE_SOURCES.md`.
+- **3D models:** NASA 3D Resources (https://science.nasa.gov/3d-resources/), free to use with credit: Apollo Lunar Module, InSight, Ingenuity, Perseverance.
+- **Photos:** NASA, NASA/JPL-Caltech and NASA/LRO imagery, plus a ZEISS infographic and a Hasselblad product photo. The credits for the last two, and for the Antares and Hasselblad cut-outs, are not yet confirmed. Check them before publishing.
+- **ECHO logo and the Hasselblad 3D model:** created by this team.
+- NASA imagery is generally free to use with credit (https://www.nasa.gov/nasa-brand-center/images-and-media/). Other agencies have their own terms.
 
-Where to find real media:
+## Known limitations
 
-- NASA Image and Video Library: https://images.nasa.gov
-- NASA Photojournal (JPL): https://photojournal.jpl.nasa.gov
-- NASA Science, Mars missions: https://science.nasa.gov/mars/
-- Apollo Lunar Surface Journal: https://www.nasa.gov/history/alsj/
-- ISRO Chandrayaan-3 gallery: https://www.isro.gov.in/Chandrayaan3.html
-
-NASA imagery is generally free to use with credit (see https://www.nasa.gov/nasa-brand-center/images-and-media/). ISRO and other agencies have their own terms, so check before using their photos. Typical credit lines look like "NASA/JPL-Caltech" or "NASA/JPL-Caltech/MSSS".
-
-## Facts to verify
-
-The seed content was written from memory of published NASA and ISRO figures, without network access to check them against the sources. The items below are the ones most worth confirming; each also has a `_todo` note next to it in the data file.
-
-| Where | Value | Why it needs a look |
-| --- | --- | --- |
-| `bodies.json` sun | distance and orbital period `0` | Convention for "no parent", not a measured value |
-| `bodies.json` sun | `rotationPeriodHours` 609.12 | Sidereal period near the equator; the Sun rotates more slowly at its poles |
-| `bodies.json` saturn, uranus, neptune | distance 1432.0, 2867.0, 4515.0 million km | NASA fact sheet revisions differ (1433.5, 2872.5, 4495.1) |
-| `bodies.json` pluto | `axialTiltDeg` 122.53 | Also quoted as 119.5 |
-| `bodies.json` moon | `axialTiltDeg` 6.68 | Relative to its orbit; about 1.54 relative to the ecliptic |
-| `tools.json` curiosity | -4.5895, 137.4417 | Bradbury Landing. The brief's -5.4, 137.8 is the centre of Gale Crater, not the landing site |
-| `tools.json` ingenuity | 18.44, 77.45 | Approximate position of Wright Brothers Field |
-| `tools.json` laser-retroreflector | -3.644, -17.478 | Pinned to the Apollo 14 array at Fra Mauro so its hotspot does not sit on top of the Apollo 11 lander; confirm the coordinates |
-| `tools.json` chandrayaan-3-vikram | -69.373, 32.319 | ISRO's first announcement gave about -69.368, 32.348 |
-| `tools.json` insight | "more than 1,300 marsquakes" | Final count is quoted as 1,319 |
-| `tools.json` curiosity | "roughly 900 kg" | Published mass is 899 kg |
-| `tools.json` apollo-11-eagle | "about 21.5 hours on the surface" | Commonly quoted as 21 h 36 min |
-
-| `tools.json` apollo-14-antares | -3.6453, -17.4714 | NASA's mission summary gives 3°40'27" S, 17°27'58" W (about -3.674, -17.466). The top image's source and credit are unconfirmed |
-| `tools.json` hasselblad-camera | 0.6741, 23.473 (Apollo 11 site) | The pictured camera's mission is not confirmed, so the location is an assumption. The photo's source, licence and credit are unconfirmed |
+- Only some tools have 3D models or real photos. The Hasselblad camera, lunar roving vehicle, laser retroreflector, Chandrayaan-3 and Curiosity have no NASA 3D model (Curiosity is published only as 3D-printing files).
+- Earth imagery, active fires, the climate probe, data search, dataset links, credits and the Earth quiz use built-in fixtures; the API does not serve them yet. The "mean temp" fact shows "No data".
+- If the API cannot be reached, the client falls back to its fixtures. The pill in the top-right reads "LIVE API" or "MOCK DATA".
+- The mind-map pages need an internet connection (Tailwind, React and Babel load from CDNs), and uploaded images exist only in the visitor's browser.
+- The seed facts were written from published NASA and ISRO figures and not all were checked against the sources. Items worth confirming each have a `_todo` note in the data files, for example Curiosity's landing coordinates, Ingenuity's position, the retroreflector pin, Chandrayaan-3's coordinates and the Hasselblad camera's mission.
 
 Reference sources: NASA Planetary Fact Sheets (https://nssdc.gsfc.nasa.gov/planetary/factsheet/), NASA mission pages (https://science.nasa.gov), ISRO (https://www.isro.gov.in).

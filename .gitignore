@@ -1,4 +1,20 @@
+# Dependencies and build output
 node_modules/
 dist/
-.env
 coverage/
+
+# Environment (keep the example file)
+.env
+.env.*
+!.env.example
+
+# Claude Code working files and worktrees
+.claude/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
+
+# Vercel local link
+.vercel/
